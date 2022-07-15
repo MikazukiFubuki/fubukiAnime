@@ -9,12 +9,12 @@ import java.util.List;
 
 @SpringBootTest
 public class AnimeCreateServiceTest {
-    @Autowired
+    /*@Autowired
     private AnimeCreateService animeCreateService;
 
     @Test
     void testFindAll() {
         List<AnimeCreate> list = animeCreateService.list();
         System.out.println(list);
-    }
+    }*/
 }

@@ -26,9 +26,9 @@ public class AnimeMainController {
         return new R(true, animeMainService.selectMainById(id));
     }
 
-    @GetMapping("/{page}/{size}")
-    public R selectMainAll(@PathVariable Integer page,@PathVariable Integer size, AnimeMain animeMain){
-        PageInfo<AnimeMain> pageInfo = animeMainService.selectMainAll(page, size, animeMain);
+    @GetMapping("/{currentPage}/{pageSize}")
+    public R selectMainAll(@PathVariable Integer currentPage,@PathVariable Integer pageSize, AnimeMain animeMain){
+        PageInfo<AnimeMain> pageInfo = animeMainService.selectMainAll(currentPage, pageSize, animeMain);
         //如果当前页码值大于了总页码值，那么重新执行查询操作，使用最大页码值作为当前页码值
         /*if( currentPage > page.getPages()){
             page = animeMainService.getPage((int)page.getPages(), pageSize,animeMain);

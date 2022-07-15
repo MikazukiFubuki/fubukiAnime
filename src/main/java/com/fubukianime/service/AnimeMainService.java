@@ -25,8 +25,6 @@ public interface AnimeMainService extends IService<AnimeMain> {
 
     public PageInfo<AnimeMain> selectMainAll(int pageNum, int pageSize, AnimeMain animeMain);
 
-    IPage<AnimeMain> getPage(int currentPage, int pageSize);
 
-    IPage<AnimeMain> getPage(int currentPage, int pageSize, AnimeMain animeMain);
 
 }

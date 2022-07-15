@@ -11,7 +11,7 @@ import java.util.List;
 @SpringBootTest
 class AnimeLoveDaoTest {
 
-    @Autowired
+    /*@Autowired
     private AnimeLoveDao animeLoveDao;
 
 
@@ -25,5 +25,5 @@ class AnimeLoveDaoTest {
     void testGetById() {
         AnimeLove animeLove = animeLoveDao.selectById(1L);
         System.out.println(animeLove);
-    }
+    }*/
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @SpringBootTest
 class AnimeMainDaoTest {
 
-    @Autowired
+    /*@Autowired
     private AnimeMainDao animeMainDao;
 
 
@@ -27,7 +27,7 @@ class AnimeMainDaoTest {
     public void testSelectMainAll(){
         List<AnimeMain> animeMainList = animeMainDao.selectMainAll();
         System.out.println(animeMainList);
-    }
+    }/*
 
     @Test
     void testGetById() {
@@ -48,7 +48,7 @@ class AnimeMainDaoTest {
         System.out.println("一共多少页："+page.getPages());
         System.out.println("一共多少条数据："+page.getTotal());
         System.out.println("数据："+page.getRecords());
-    }
+    }*/
 
 
 }

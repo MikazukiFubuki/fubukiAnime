@@ -36,7 +36,7 @@
         <select id="selectMainAll" resultType="com.fubukianime.domain.AnimeMain">
             select T0.id,
                    T0.name,
-                   T0.score,
+                   format(T0.score, 2) score,
                    T2.source1,
                    T2.source2,
                    T2.source3,

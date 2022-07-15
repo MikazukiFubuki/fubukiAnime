@@ -10,7 +10,7 @@ import java.util.List;
 @SpringBootTest
 class AnimeQuarterDaoTest {
 
-    @Autowired
+    /*@Autowired
     private AnimeQuarterDao animeQuarterDao;
 
 
@@ -24,5 +24,5 @@ class AnimeQuarterDaoTest {
     void testGetById() {
         AnimeQuarter animeQuarter = animeQuarterDao.selectById(1L);
         System.out.println(animeQuarter);
-    }
+    }*/
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 @SpringBootTest
 public class AnimeMainServiceTest {
-    @Autowired
+    /*@Autowired
     private AnimeMainService animeMainService;
 
     @Test
@@ -33,7 +33,7 @@ public class AnimeMainServiceTest {
     void testSelectMainById(){
         AnimeMain animeMain = animeMainService.selectMainById(1);
         System.out.println(animeMain);
-    }
+    }*/
 
 
 }
