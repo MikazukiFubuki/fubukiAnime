@@ -13,23 +13,23 @@ import java.util.List;
 @SpringBootTest
 class AnimeMainDaoTest {
 
-    /*@Autowired
+    @Autowired
     private AnimeMainDao animeMainDao;
 
 
-    @Test
+    /*@Test
     public void testGetAll(){
         List<AnimeMain> animeMainList = animeMainDao.selectList(null);
         System.out.println(animeMainList);
-    }
+    }*/
 
     @Test
     public void testSelectMainAll(){
         List<AnimeMain> animeMainList = animeMainDao.selectMainAll();
         System.out.println(animeMainList);
-    }/*
+    }
 
-    @Test
+    /*@Test
     void testGetById() {
         AnimeMain animeMain = animeMainDao.selectById(1L);
         System.out.println(animeMain);

@@ -1,5 +1,6 @@
 package com.fubukianime.service;
 
+import com.fubukianime.dao.AnimeMainDao;
 import com.fubukianime.domain.AnimeMain;
 import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Test;
@@ -12,15 +13,19 @@ import java.util.List;
 public class AnimeMainServiceTest {
     /*@Autowired
     private AnimeMainService animeMainService;
-
+    @Autowired
+    private AnimeMain animeMain;
+*//*
     @Test
     void testFindAll() {
         List<AnimeMain> list = animeMainService.list();
         System.out.println(list);
-    }
+    }*//*
 
     @Test
     void testSelectMainAll() {
+        List<AnimeMain> list = animeMainService.selectMainAll(1,10,animeMain);
+        System.out.println(list);
     }
 
     @Test

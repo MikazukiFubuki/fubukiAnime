@@ -54,7 +54,6 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
     public PageInfo<AnimeMain> selectMainAll(int pageNum, int pageSize, AnimeMain animeMain) {
         LambdaQueryWrapper<AnimeMain> lqw = new LambdaQueryWrapper<AnimeMain>();
         lqw.like(Strings.isNotEmpty(animeMain.getName()), AnimeMain::getName, animeMain.getName());
-        lqw.like(null!=animeMain.getScore(),AnimeMain::getScore, animeMain.getScore());
         lqw.like(Strings.isNotEmpty(animeMain.getSource1()), AnimeMain::getSource1, animeMain.getSource1());
         lqw.like(Strings.isNotEmpty(animeMain.getSource2()), AnimeMain::getSource2, animeMain.getSource2());
         lqw.like(Strings.isNotEmpty(animeMain.getSource3()), AnimeMain::getSource3, animeMain.getSource3());
@@ -65,15 +64,14 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
         lqw.like(Strings.isNotEmpty(animeMain.getLove()), AnimeMain::getLove, animeMain.getLove());
         lqw.like(Strings.isNotEmpty(animeMain.getSexLimit()), AnimeMain::getSexLimit, animeMain.getSexLimit());
         lqw.like(Strings.isNotEmpty(animeMain.getCreate()), AnimeMain::getCreate, animeMain.getCreate());
-        lqw.like(null!=animeMain.getCompleteId(),AnimeMain::getCompleteId, animeMain.getCompleteId());
-        lqw.like(null!=animeMain.getBingeWatchingId(),AnimeMain::getBingeWatchingId, animeMain.getBingeWatchingId());
-        lqw.like(null!=animeMain.getReviewId(),AnimeMain::getReviewId, animeMain.getReviewId());
+        lqw.like(Strings.isNotEmpty(animeMain.getCompleteId()),AnimeMain::getCompleteId, animeMain.getCompleteId());
+        lqw.like(Strings.isNotEmpty(animeMain.getBingeWatchingId()),AnimeMain::getBingeWatchingId, animeMain.getBingeWatchingId());
+        lqw.like(Strings.isNotEmpty(animeMain.getReviewId()),AnimeMain::getReviewId, animeMain.getReviewId());
         lqw.like(Strings.isNotEmpty(animeMain.getLeaderGender()), AnimeMain::getLeaderGender, animeMain.getLeaderGender());
         lqw.like(Strings.isNotEmpty(animeMain.getFavoriteHeroine()), AnimeMain::getFavoriteHeroine, animeMain.getFavoriteHeroine());
         lqw.like(Strings.isNotEmpty(animeMain.getAnimationEnd()), AnimeMain::getAnimationEnd, animeMain.getAnimationEnd());
         lqw.like(Strings.isNotEmpty(animeMain.getOriginalEnd()), AnimeMain::getOriginalEnd, animeMain.getOriginalEnd());
-        lqw.like(null!=animeMain.getBroadcastStartYear(),AnimeMain::getBroadcastStartYear, animeMain.getBroadcastStartYear());
-        lqw.like(null!=animeMain.getBroadcastEndYear(),AnimeMain::getBroadcastEndYear, animeMain.getBroadcastEndYear());
+        lqw.like(Strings.isNotEmpty(animeMain.getBroadcastYear()),AnimeMain::getBroadcastYear, animeMain.getBroadcastYear());
         lqw.like(Strings.isNotEmpty(animeMain.getBingeWatchingType()), AnimeMain::getBingeWatchingType, animeMain.getBingeWatchingType());
         lqw.like(Strings.isNotEmpty(animeMain.getBingeWatchingQuarter()), AnimeMain::getBingeWatchingQuarter, animeMain.getBingeWatchingQuarter());
         lqw.like(Strings.isNotEmpty(animeMain.getCompleteQuarter()), AnimeMain::getCompleteQuarter, animeMain.getCompleteQuarter());

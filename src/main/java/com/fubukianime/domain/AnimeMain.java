@@ -72,7 +72,7 @@ public class AnimeMain implements Serializable {
      * 动画补完序号
      */
     @TableField("complete_id")
-    private Integer completeId;
+    private String completeId;
 
     /**
      * 动画追番情况
@@ -95,8 +95,7 @@ public class AnimeMain implements Serializable {
      * 动画播出最终年份
      */
     @TableField("broadcast_end_year")
-    @JsonFormat(pattern = "yyyy",timezone = "GMT+8")
-    private Object broadcastEndYear;
+    private String broadcastEndYear;
 
     /**
      * 动画最爱女主
@@ -108,7 +107,7 @@ public class AnimeMain implements Serializable {
      * 动画追番序号
      */
     @TableField("binge_watching_id")
-    private Integer bingeWatchingId;
+    private String bingeWatchingId;
 
     /**
      * 动画创作类型
@@ -138,8 +137,7 @@ public class AnimeMain implements Serializable {
      * 动画播出起始年份
      */
     @TableField("broadcast_start_year")
-    @JsonFormat(pattern = "yyyy",timezone = "GMT+8")
-    private Object broadcastStartYear;
+    private String broadcastStartYear;
 
     /**
      * 动画结局
@@ -157,7 +155,7 @@ public class AnimeMain implements Serializable {
      * 动画重温序号
      */
     @TableField("review_id")
-    private Integer reviewId;
+    private String reviewId;
 
     /**
      * 动画恋爱类型
@@ -169,6 +167,24 @@ public class AnimeMain implements Serializable {
      */
     @TableField("layout_id")
     private String layoutId;
+
+    /**
+     * 动画追番年
+     */
+    @TableField("binge_watching_year")
+    private String bingeWatchingYear;
+
+    /**
+     * 动画补完年
+     */
+    @TableField("complete_year")
+    private String completeYear;
+
+    /**
+     * 动画播出年份
+     */
+    @TableField(exist = false)
+    private String broadcastYear;
 
     /*@TableField(exist = false)
     private static final long serialVersionUID = 1L;
