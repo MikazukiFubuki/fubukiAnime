@@ -38,7 +38,7 @@
     <select id="selectMainAll" resultType="com.fubukianime.domain.AnimeMain">
         select T0.id,
                T0.name,
-               format(T0.score, 2)    score,
+               FORMAT(T0.score, 2) score,
                T2.source1,
                T2.source2,
                T2.source3,
@@ -167,8 +167,151 @@
           AND T4.ID4 = T0.id
           AND T5.ID5 = T0.id
           AND T6.ID6 = T0.id
-        ORDER BY T0.id ASC
+        ORDER BY T0.score DESC ,T0.id ASC
     </select>
+
+    <select id="selectMainByCondition" resultType="com.fubukianime.domain.AnimeMain">
+        select T0.id,
+        T0.name,
+        FORMAT(T0.score, 2) score,
+        T2.source1,
+        T2.source2,
+        T2.source3,
+        T4.layoutId,
+        T3.type1,
+        T3.type2,
+        T3.type3,
+        T1.love,
+        T1.sex_limit           sexLimit,
+        T1.`create`,
+        T0.binge_watching_id   bingeWatchingId,
+        T0.complete_id         completeId,
+        T0.review_id           reviewId,
+        T1.leader_gender       leaderGender,
+        T0.favorite_heroine    favoriteHeroine,
+        T1.animation_end       animationEnd,
+        T1.original_end        originalEnd,
+        T5.broadcastStartYear,
+        T5.broadcastEndYear,
+        T5.broadcastYear,
+        T1.binge_watching_type bingeWatchingType,
+        T6.bingeWatchingYear,
+        T6.completeYear,
+        T6.bingeWatchingQuarter,
+        T6.completeQuarter,
+        T1.status
+
+        from anime.anime_main T0,
+
+        (select a.id as ID1,
+        b.sex_limit,
+        c.love,
+        d.leader_gender,
+        e.animation_end,
+        f.original_end,
+        g.binge_watching_type,
+        j.`create`,
+        k.status
+        from (((((((anime.anime_main a
+        join anime.anime_sexlimit b
+        on a.sex_limit = b.id
+        or ifnull(a.sex_limit, 6) = b.id)
+        join anime.anime_love c
+        on a.love = c.id
+        or ifnull(a.love, 12) = b.id)
+        join anime.anime_leadergender d
+        on a.leader_gender = d.id
+        or ifnull(a.leader_gender, 12) = d.id)
+        join anime.anime_animationend e
+        on a.animation_end = e.id
+        or ifnull(a.animation_end, 5) = e.id)
+        join anime.anime_originalend f
+        on a.original_end = f.id
+        or ifnull(a.original_end, 8) = f.id)
+        join anime.anime_bingewatchingtype g
+        on a.binge_watching_type = g.id)
+        join anime.anime_create j
+        on a.`create` = j.id)
+        join anime_status k
+        on a.status = k.id
+        group by a.id
+        order by a.id asc) as T1,
+
+        (select a.id ID2, b.source source1, c.source source2, d.source source3
+        from ((anime.anime_main a
+        join anime.anime_source b
+        on a.source_1 = b.id
+        or ifnull(a.source_1, 26) = b.id)
+        join anime.anime_source c
+        on a.source_2 = c.id
+        or ifnull(a.source_2, 26) = c.id)
+        join anime.anime_source d
+        on a.source_3 = d.id
+        or ifnull(a.source_3, 26) = d.id
+        group by a.id
+        ) as T2,
+
+        (select a.id ID3, b.type type1, c.type type2, d.type type3
+        from ((anime.anime_main a
+        join anime.anime_type b
+        on a.type_1 = b.id
+        or ifnull(a.type_1, 127) = b.id)
+        join anime.anime_type c
+        on a.type_2 = c.id
+        or ifnull(a.type_2, 127) = c.id)
+        join anime.anime_type d
+        on a.type_3 = d.id
+        or ifnull(a.type_3, 127) = d.id
+        group by a.id) as T3,
+
+        (select layout_id ID4, group_concat(t3.layout separator '、') layoutId
+        from (select t1.id,
+        t1.layout_id,
+        concat_ws('', t1.another_name, t2.layout_type, concat(t1.quarter_num, '季'),
+        concat(t1.episodes, '集')) as layout
+        from anime_layout t1
+        join anime_layout_type t2
+        on t1.layout_type_id = t2.id
+        order by t1.layout_id) as t3
+        group by t3.layout_id) as T4,
+
+        (select t1.id                                   ID5,
+        if(t2.year = t3.year, t2.year,
+        concat_ws('-', t2.year, t3.year)) AS broadcastYear,
+        t2.year                                 broadcastStartYear,
+        t3.year                                 broadcastEndYear
+        from (anime_main t1
+        join anime.anime_year t2
+        on t1.broadcast_start_year = t2.id)
+        join anime_year t3 on t1.broadcast_end_year = t3.id
+        ) as T5,
+
+        (select t1.id                                    ID6,
+        t2.year                                 bingeWatchingYear,
+        t3.year                                 completeYear,
+        concat_ws('', t2.year, t4.quarter_CN) as bingeWatchingQuarter,
+        concat_ws('', t3.year, t5.quarter_CN) as completeQuarter
+        from (((anime_main t1
+        join anime_year t2 on t1.binge_watching_year = t2.id) join anime_year t3 on t1.complete_year = t3.id)
+        join quarter t4 on t1.binge_watching_quarter = t4.id)
+        join quarter t5 on t1.complete_quarter = t5.id) as T6
+
+        <where>
+        1 = 1
+        AND T2.ID2 = T0.id
+        AND T3.ID3 = T0.id
+        AND T1.ID1 = T0.id
+        AND T4.ID4 = T0.id
+        AND T5.ID5 = T0.id
+        AND T6.ID6 = T0.id
+
+            <if test="name != null and name != '' ">
+                and T0.name like #{name}
+            </if>
+        </where>
+        ORDER BY T0.score DESC ,T0.id ASC
+    </select>
+
     <select id="selectMainById" resultType="com.fubukianime.domain.AnimeMain">
         select T0.id,
                T0.name,
@@ -284,7 +427,7 @@
           AND T1.ID1 = T0.id
           AND T4.ID4 = T0.id
           AND T0.id = #{id}
-        ORDER BY T0.id ASC
+        ORDER BY T0.status,T0.id ASC
     </select>
 
     <!--<sql id="Base_Column_List">

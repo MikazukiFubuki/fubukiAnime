@@ -5,7 +5,6 @@ import com.fubukianime.controller.utils.R;
 import com.fubukianime.domain.AnimeLove;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.service.AnimeMainService;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +20,12 @@ public class AnimeMainController {
     @Autowired
     private AnimeMainService animeMainService;
 
+    @GetMapping
+    public R getAll(){
+        return new R(true, animeMainService.list());
+    }
+
+
     @GetMapping("/{id}")
     public R getById(@PathVariable Integer id){
         return new R(true, animeMainService.selectMainById(id));
@@ -28,13 +33,23 @@ public class AnimeMainController {
 
     @GetMapping("/{currentPage}/{pageSize}")
     public R selectMainAll(@PathVariable Integer currentPage,@PathVariable Integer pageSize, AnimeMain animeMain){
-        PageInfo<AnimeMain> pageInfo = animeMainService.selectMainAll(currentPage, pageSize, animeMain);
+        IPage<AnimeMain> page = animeMainService.getPage(currentPage, pageSize,animeMain);
         //如果当前页码值大于了总页码值，那么重新执行查询操作，使用最大页码值作为当前页码值
-        /*if( currentPage > page.getPages()){
+        if( currentPage > page.getPages()){
             page = animeMainService.getPage((int)page.getPages(), pageSize,animeMain);
-        }*/
-        return new R(true, pageInfo);
+        }
+        return new R(true, page);
     }
+
+    /*@GetMapping("/{currentPage}/{pageSize}")
+    public R selectMainByCondition(@PathVariable Integer currentPage,@PathVariable Integer pageSize, AnimeMain animeMain){
+        PageInfo<AnimeMain> pageInfo = animeMainService.getPage(currentPage, pageSize, animeMain);
+        //如果当前页码值大于了总页码值，那么重新执行查询操作，使用最大页码值作为当前页码值
+        *//*if( currentPage > page.getPages()){
+            page = animeMainService.getPage((int)page.getPages(), pageSize,animeMain);
+        }*//*
+        return new R(true, pageInfo);
+    }*/
 
 
 

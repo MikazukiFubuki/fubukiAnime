@@ -2,9 +2,9 @@ package com.fubukianime.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fubukianime.domain.AnimeLove;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.domain.AnimeMain;
-import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -23,7 +23,11 @@ public interface AnimeMainService extends IService<AnimeMain> {
 
     AnimeMain selectMainById(Integer id);
 
-    public PageInfo<AnimeMain> selectMainAll(int pageNum, int pageSize, AnimeMain animeMain);
+    IPage<AnimeMain> getPage(int currentPage, int pageSize);
+
+    IPage<AnimeMain> getPage(int currentPage, int pageSize, AnimeMain animeMain);
+
+
 
 
 
