@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fubukianime.dao.AnimeMainDao;
 import com.fubukianime.domain.AnimeMain;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.util.Strings;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,9 +83,12 @@ public class AnimeMainServiceTest {
         animeMain.setName(name);
 //        QueryWrapper<AnimeMain> queryWrapper = new QueryWrapper<>();
 //        queryWrapper.like("name", "a");
-        IPage page = new Page(1,10);
-        IPage<AnimeMain> list = animeMainService.getPage(1, 10,animeMain);
-        System.out.println(list);
+
+
+        PageHelper.startPage(1, 10);
+        List<AnimeMain> animeMainList = animeMainDao.selectMainByCondition(animeMain);
+        PageInfo<AnimeMain> animeMainPageInfo = new PageInfo<>(animeMainList, 10);
+        System.out.println(animeMainPageInfo);
 
     }
 

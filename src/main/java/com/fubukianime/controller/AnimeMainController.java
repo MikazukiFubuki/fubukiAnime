@@ -6,6 +6,7 @@ import com.fubukianime.controller.utils.R;
 import com.fubukianime.dao.AnimeMainDao;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.service.AnimeMainService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -61,26 +62,10 @@ public class AnimeMainController {
      * @param animeMain
      * @return
      */
-    @GetMapping("/byCondition")
-    public R selectByCondition(AnimeMain animeMain){
-        animeMain.getClass();
-        List<AnimeMain> list = animeMainDao.selectMainByCondition(animeMain);
-        return new R(true, list);
-    }
-
-
-
-
-    /*@GetMapping("/{currentPage}/{pageSize}")
-    public R selectMainByCondition(@PathVariable Integer currentPage,@PathVariable Integer pageSize, AnimeMain animeMain){
-        PageInfo<AnimeMain> pageInfo = animeMainService.getPage(currentPage, pageSize, animeMain);
-        //如果当前页码值大于了总页码值，那么重新执行查询操作，使用最大页码值作为当前页码值
-        *//*if( currentPage > page.getPages()){
-            page = animeMainService.getPage((int)page.getPages(), pageSize,animeMain);
-        }*//*
+    @GetMapping("/byCondition/{currentPage}/{pageSize}")
+    public R selectByCondition(@PathVariable Integer currentPage,@PathVariable Integer pageSize, AnimeMain animeMain){
+        PageInfo<AnimeMain> pageInfo = animeMainService.selectByCondition(currentPage, pageSize,animeMain);
         return new R(true, pageInfo);
-    }*/
-
-
+    }
 
 }

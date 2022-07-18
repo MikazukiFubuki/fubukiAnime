@@ -6,6 +6,7 @@ import com.fubukianime.domain.AnimeLove;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.entity.PageResult;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,7 @@ public interface AnimeMainService extends IService<AnimeMain> {
      */
     IPage<AnimeMain> getPage(int currentPage, int pageSize, AnimeMain animeMain);
 
+    PageInfo<AnimeMain> selectByCondition(Integer pageNum, Integer pageSize, AnimeMain animeMain);
 
 
 

@@ -40,7 +40,7 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
 
     /**
      * 条件查询
-     * @param animeMain
+     * @param
      * @return
      */
     List<AnimeMain> selectMainByCondition(AnimeMain animeMain);

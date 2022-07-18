@@ -12,6 +12,7 @@ import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.entity.PageResult;
 import com.fubukianime.service.AnimeMainService;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,5 +78,13 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
         Page<AnimeMain> page = new Page<>(currentPage,pageSize);
         animeMainDao.selectMainAll(page);
         return page;
+    }
+
+    @Override
+    public PageInfo<AnimeMain> selectByCondition(Integer pageNum, Integer pageSize, AnimeMain animeMain) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<AnimeMain> animeMainList = animeMainDao.selectMainByCondition(animeMain);
+        PageInfo<AnimeMain> animeMainPageInfo = new PageInfo<>(animeMainList, pageSize);
+        return animeMainPageInfo;
     }
 }
