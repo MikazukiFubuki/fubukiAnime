@@ -1,6 +1,10 @@
 package com.fubukianime.dao;
 
 
+import com.alibaba.druid.Constants;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -9,6 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author wyx
@@ -19,12 +24,26 @@ import java.util.List;
 @Mapper
 public interface AnimeMainDao extends BaseMapper<AnimeMain> {
 
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
     public AnimeMain selectMainById(Integer id);
 
-
+    /**
+     * 查询全部并分页
+     * @param page
+     * @return
+     */
     IPage<AnimeMain> selectMainAll(Page<AnimeMain> page);
 
-    IPage<AnimeMain> selectMainByCondition(@Param("name") Page<AnimeMain> page);
+    /**
+     * 条件查询
+     * @param animeMain
+     * @return
+     */
+    List<AnimeMain> selectMainByCondition(AnimeMain animeMain);
 
 
 }

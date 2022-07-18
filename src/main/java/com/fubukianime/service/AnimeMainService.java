@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.fubukianime.domain.AnimeLove;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.domain.AnimeMain;
+import com.fubukianime.entity.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * @author wyx
@@ -23,9 +25,31 @@ public interface AnimeMainService extends IService<AnimeMain> {
 
     AnimeMain selectMainById(Integer id);
 
+    /**
+     * 分页查询
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
     IPage<AnimeMain> getPage(int currentPage, int pageSize);
 
+    /**
+     * 全部分页查询
+     * @param currentPage
+     * @param pageSize
+     * @param animeMain
+     * @return
+     */
     IPage<AnimeMain> getPage(int currentPage, int pageSize, AnimeMain animeMain);
+
+
+
+
+
+
+
+
+
 
 
 

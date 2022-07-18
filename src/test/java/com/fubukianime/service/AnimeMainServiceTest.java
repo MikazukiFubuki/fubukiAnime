@@ -1,6 +1,8 @@
 package com.fubukianime.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fubukianime.dao.AnimeMainDao;
 import com.fubukianime.domain.AnimeMain;
 
@@ -68,6 +70,22 @@ public class AnimeMainServiceTest {
         System.out.println(animeMains);
 
     }*/
+
+    @Test
+    public void testSelectByCondition() throws IOException {
+        //接收参数
+        String name = "a";
+        //方式二 ：接口方法参数是 实体类对象 方式调用的方法
+        //封装对象
+        AnimeMain animeMain = new AnimeMain();
+        animeMain.setName(name);
+//        QueryWrapper<AnimeMain> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.like("name", "a");
+        IPage page = new Page(1,10);
+        IPage<AnimeMain> list = animeMainService.getPage(1, 10,animeMain);
+        System.out.println(list);
+
+    }
 
 
 }

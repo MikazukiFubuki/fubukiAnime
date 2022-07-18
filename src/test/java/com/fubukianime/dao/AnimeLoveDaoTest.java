@@ -26,4 +26,6 @@ class AnimeLoveDaoTest {
         AnimeLove animeLove = animeLoveDao.selectById(1L);
         System.out.println(animeLove);
     }*/
+
+
 }

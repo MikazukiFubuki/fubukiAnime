@@ -1,11 +1,13 @@
 package com.fubukianime.dao;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fubukianime.domain.AnimeMain;
 import org.apache.logging.log4j.util.Strings;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.commons.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -23,31 +25,43 @@ class AnimeMainDaoTest {
     private AnimeMainDao animeMainDao;
 
 
-    /*@Test
+    @Test
     public void testGetAll(){
-        List<AnimeMain> animeMainList = animeMainDao.selectList(null);
+        Page<AnimeMain> page = new Page<>(1,10);
+        IPage<AnimeMain> animeMainList = animeMainDao.selectMainAll(page);
         System.out.println(animeMainList);
-    }*/
+    }
 
     @Test
     public void testSelectByCondition() throws IOException {
-        /*//接收参数
-        String name = "你";
+        //接收参数
+        String name = "a";
         //方式二 ：接口方法参数是 实体类对象 方式调用的方法
         //封装对象
         AnimeMain animeMain = new AnimeMain();
         animeMain.setName(name);
-        LambdaQueryWrapper<AnimeMain> lqw = new LambdaQueryWrapper<AnimeMain>();
-        lqw.like(Strings.isNotEmpty(animeMain.getName()), AnimeMain::getName, animeMain.getName());
+//        QueryWrapper<AnimeMain> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.like("name", "a");
+        List<AnimeMain> list = animeMainDao.selectMainByCondition(animeMain);
+        System.out.println(list);;
         //animeMain.setName(name);*/
 
+        /*Page<AnimeMain> page = new Page<>(1,10);
+        QueryWrapper<AnimeMain> wrapper = new QueryWrapper<>();
+        wrapper.like("name", "你");
+        *//*Page<AnimeMain> page = new Page<>(1,10);*//*
+        List<AnimeMain> ipage = animeMainDao.selectMainByCondition(page, wrapper);
+
+
+        System.out.println(ipage);
+*/
 
 
         //4. 执行方法
         //方式三 ：接口方法参数是 map集合对象 方式调用的方法
-        Page<AnimeMain> page = new Page<>(1,10);
+        /*Page<AnimeMain> page = new Page<>(1,10);
         IPage<AnimeMain> ipage = animeMainDao.selectMainByCondition(page);
-        System.out.println(ipage);
+        System.out.println(ipage);*/
 
     }
 

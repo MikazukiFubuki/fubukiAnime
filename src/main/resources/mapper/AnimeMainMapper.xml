@@ -35,6 +35,7 @@
         <result property="completeYear" column="complete_year" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <!--查询全部并分页-->
     <select id="selectMainAll" resultType="com.fubukianime.domain.AnimeMain">
         select T0.id,
                T0.name,
@@ -170,17 +171,20 @@
         ORDER BY T0.score DESC ,T0.id ASC
     </select>
 
-    <select id="selectMainByCondition" resultType="com.fubukianime.domain.AnimeMain">
+    <!--条件模糊查询-->
+    <select id="selectMainByCondition" parameterType="java.util.List" resultType="com.fubukianime.domain.AnimeMain">
         select T0.id,
         T0.name,
         FORMAT(T0.score, 2) score,
         T2.source1,
         T2.source2,
         T2.source3,
+        T2.source,
         T4.layoutId,
         T3.type1,
         T3.type2,
         T3.type3,
+        T3.type,
         T1.love,
         T1.sex_limit           sexLimit,
         T1.`create`,
@@ -237,7 +241,7 @@
         group by a.id
         order by a.id asc) as T1,
 
-        (select a.id ID2, b.source source1, c.source source2, d.source source3
+        (select a.id ID2, b.source source1, c.source source2, d.source source3,concat_ws('-', b.source, c.source, d.source) source
         from ((anime.anime_main a
         join anime.anime_source b
         on a.source_1 = b.id
@@ -251,7 +255,7 @@
         group by a.id
         ) as T2,
 
-        (select a.id ID3, b.type type1, c.type type2, d.type type3
+        (select a.id ID3, b.type type1, c.type type2, d.type type3,concat_ws('-', b.type, c.type, d.type) type
         from ((anime.anime_main a
         join anime.anime_type b
         on a.type_1 = b.id
@@ -296,22 +300,91 @@
         join quarter t4 on t1.binge_watching_quarter = t4.id)
         join quarter t5 on t1.complete_quarter = t5.id) as T6
 
-        <where>
-        1 = 1
-        AND T2.ID2 = T0.id
+        WHERE
+        T2.ID2 = T0.id
         AND T3.ID3 = T0.id
         AND T1.ID1 = T0.id
         AND T4.ID4 = T0.id
         AND T5.ID5 = T0.id
         AND T6.ID6 = T0.id
 
-            <if test="name != null and name != '' ">
-                and T0.name like #{name}
-            </if>
-        </where>
+        <if test="name != null and name != '' ">
+            and T0.name like "%"#{name}"%"
+        </if>
+        <if test="score != null and score != '' ">
+            and T0.score like CONCAT('%',#{score},'%')
+        </if>
+        <if test="source != null and source != '' ">
+            and T2.source like CONCAT('%',#{source},'%')
+        </if>
+        <if test="layoutId != null and layoutId != '' ">
+            and T4.layoutId like CONCAT('%',#{layoutId},'%')
+        </if>
+        <if test="type != null and type != '' ">
+            and T3.type like CONCAT('%',#{type},'%')
+        </if>
+        <if test="love != null and love != '' ">
+            and T1.love like CONCAT('%',#{love},'%')
+        </if>
+        <if test="sexLimit != null and sexLimit != '' ">
+            and T1.sex_limit like CONCAT('%',#{sexLimit},'%')
+        </if>
+        <if test="create != null and create != '' ">
+            and T1.`create` like CONCAT('%',#{create},'%')
+        </if>
+        <if test="bingeWatchingId != null and bingeWatchingId != '' ">
+            and T0.binge_watching_id like CONCAT('%',#{bingeWatchingId},'%')
+        </if>
+        <if test="completeId != null and completeId != '' ">
+            and T0.complete_id like CONCAT('%',#{completeId},'%')
+        </if>
+        <if test="reviewId != null and reviewId != '' ">
+            and T0.review_id  like CONCAT('%',#{reviewId},'%')
+        </if>
+        <if test="leaderGender != null and leaderGender != '' ">
+            and T1.leader_gender  like CONCAT('%',#{leaderGender},'%')
+        </if>
+        <if test="favoriteHeroine != null and favoriteHeroine != '' ">
+            and T0.favorite_heroine  like CONCAT('%',#{favoriteHeroine},'%')
+        </if>
+        <if test="animationEnd != null and animationEnd != '' ">
+            and T1.animation_end like CONCAT('%',#{animationEnd},'%')
+        </if>
+        <if test="originalEnd != null and originalEnd != '' ">
+            and T1.original_end like CONCAT('%',#{originalEnd},'%')
+        </if>
+        <if test="broadcastStartYear != null and broadcastStartYear != '' ">
+            and T5.broadcastStartYear like CONCAT('%',#{broadcastStartYear},'%')
+        </if>
+        <if test="broadcastEndYear != null and broadcastEndYear != '' ">
+            and T5.broadcastEndYear like CONCAT('%',#{broadcastEndYear},'%')
+        </if>
+        <if test="broadcastYear != null and broadcastYear != '' ">
+            and T5.broadcastYear like CONCAT('%',#{broadcastYear},'%')
+        </if>
+        <if test="bingeWatchingType != null and bingeWatchingType != '' ">
+            and T1.binge_watching_type like CONCAT('%',#{bingeWatchingType},'%')
+        </if>
+        <if test="bingeWatchingYear != null and bingeWatchingYear != '' ">
+            and T6.bingeWatchingYear like CONCAT('%',#{bingeWatchingYear},'%')
+        </if>
+        <if test="completeYear != null and completeYear != '' ">
+            and T6.completeYear like CONCAT('%',#{completeYear},'%')
+        </if>
+        <if test="bingeWatchingQuarter != null and bingeWatchingQuarter != '' ">
+            and T6.bingeWatchingQuarter like CONCAT('%',#{bingeWatchingQuarter},'%')
+        </if>
+        <if test="completeQuarter != null and completeQuarter != '' ">
+            and T6.completeQuarter like CONCAT('%',#{completeQuarter},'%')
+        </if>
+        <if test="status != null and status != '' ">
+            and T1.status likeCONCAT('%',#{status},'%')
+        </if>
+
         ORDER BY T0.score DESC ,T0.id ASC
     </select>
 
+    <!--根据id查询-->
     <select id="selectMainById" resultType="com.fubukianime.domain.AnimeMain">
         select T0.id,
                T0.name,
@@ -430,6 +503,7 @@
         ORDER BY T0.status,T0.id ASC
     </select>
 
+    <!--固定几个需要查询的字段-->
     <!--<sql id="Base_Column_List">
         id,name,score,
         source_1,source_2,source_3,
