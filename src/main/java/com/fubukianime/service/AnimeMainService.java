@@ -18,7 +18,7 @@ import java.util.Map;
 */
 public interface AnimeMainService extends IService<AnimeMain> {
 
-    boolean saveMain(AnimeMain animeMain);
+    boolean save(AnimeMain animeMain);
 
     boolean modify(AnimeMain animeMain);
 

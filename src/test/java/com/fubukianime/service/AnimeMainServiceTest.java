@@ -76,7 +76,7 @@ public class AnimeMainServiceTest {
     @Test
     public void testSelectByCondition() throws IOException {
         //接收参数
-        String name = "a";
+        String name = "血";
         //方式二 ：接口方法参数是 实体类对象 方式调用的方法
         //封装对象
         AnimeMain animeMain = new AnimeMain();

@@ -27,7 +27,7 @@ class AnimeMainDaoTest {
 
     @Test
     public void testGetAll(){
-        Page<AnimeMain> page = new Page<>(1,10);
+        Page<AnimeMain> page = new Page<>(148,10);
         IPage<AnimeMain> animeMainList = animeMainDao.selectMainAll(page);
         System.out.println(animeMainList);
     }
@@ -35,7 +35,7 @@ class AnimeMainDaoTest {
     @Test
     public void testSelectByCondition() throws IOException {
         //接收参数
-        String name = "a";
+        String name = "血";
         //方式二 ：接口方法参数是 实体类对象 方式调用的方法
         //封装对象
         AnimeMain animeMain = new AnimeMain();
@@ -65,12 +65,12 @@ class AnimeMainDaoTest {
 
     }
 
-    /*@Test
+    @Test
     void testGetById() {
-        AnimeMain animeMain = animeMainDao.selectById(1L);
+        AnimeMain animeMain = animeMainDao.selectMainById(1482);
         System.out.println(animeMain);
     }
-
+/*
     //分页查询
     @Test
     void testSelectPage(){

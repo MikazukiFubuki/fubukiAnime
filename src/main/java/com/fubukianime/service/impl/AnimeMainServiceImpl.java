@@ -34,8 +34,9 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
     private AnimeMainDao animeMainDao;
 
     @Override
-    public boolean saveMain(AnimeMain animeMain) {
-        return animeMainDao.insert(animeMain) > 0;
+    public boolean save(AnimeMain animeMain) {
+        animeMainDao.addAnime(animeMain);
+        return true;
     }
 
     @Override

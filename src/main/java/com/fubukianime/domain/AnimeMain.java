@@ -167,10 +167,16 @@ public class AnimeMain implements Serializable {
     private String love;
 
     /**
-     * 动画形式
+     * 动画形式id
      */
     @TableField("layout_id")
     private String layoutId;
+
+    /**
+     * 动画形式
+     */
+    @TableField(exist = false)
+    private String layout;
 
     /**
      * 动画追番年

@@ -45,5 +45,11 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
      */
     List<AnimeMain> selectMainByCondition(AnimeMain animeMain);
 
+    /**
+     * 新增动画
+     * @param animeMain
+     */
+    void addAnime(AnimeMain animeMain);
+
 
 }

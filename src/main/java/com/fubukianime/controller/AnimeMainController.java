@@ -4,11 +4,14 @@ package com.fubukianime.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fubukianime.controller.utils.R;
 import com.fubukianime.dao.AnimeMainDao;
+import com.fubukianime.domain.AnimeLove;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.service.AnimeMainService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -17,8 +20,12 @@ public class AnimeMainController {
 
     @Autowired
     private AnimeMainService animeMainService;
-    @Autowired
-    private AnimeMainDao animeMainDao;
+
+    @PostMapping
+    public R save(@RequestBody AnimeMain animeMain) throws IOException{
+        boolean flag =  animeMainService.save(animeMain);
+        return new R(flag, flag ? "添加成功^_^" : "添加失败-_-!");
+    }
 
     /**
      * 查询全部

@@ -10,6 +10,7 @@ public class FubukiAnimeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(FubukiAnimeApplication.class, args);
+
     }
 
 }
