@@ -22,7 +22,7 @@ public class AnimeBingeWatchingTypeServiceImpl extends ServiceImpl<AnimeBingeWat
     private AnimeBingeWatchingTypeDao animeBingeWatchingTypeDao;
 
     @Override
-    public boolean saveBingeWatchingType(AnimeBingeWatchingType animeBingeWatchingType) {
+    public boolean save(AnimeBingeWatchingType animeBingeWatchingType) {
         return animeBingeWatchingTypeDao.insert(animeBingeWatchingType) > 0;
     }
 

@@ -22,7 +22,7 @@ public class AnimeOriginalEndServiceImpl extends ServiceImpl<AnimeOriginalEndDao
     private AnimeOriginalEndDao animeOriginalEndDao;
 
     @Override
-    public boolean saveOriginalEnd(AnimeOriginalEnd animeOriginalEnd) {
+    public boolean save(AnimeOriginalEnd animeOriginalEnd) {
         return animeOriginalEndDao.insert(animeOriginalEnd) > 0;
     }
 

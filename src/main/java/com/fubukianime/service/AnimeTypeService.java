@@ -9,7 +9,7 @@ import com.fubukianime.domain.AnimeType;
 public interface AnimeTypeService extends IService<AnimeType> {
 
 
-    boolean saveType(AnimeType animeType);
+    boolean save(AnimeType animeType);
 
     boolean modify(AnimeType animeType);
 

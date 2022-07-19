@@ -19,7 +19,7 @@ public class AnimeQuarterServiceImpl extends ServiceImpl<AnimeQuarterDao, AnimeQ
     private AnimeQuarterDao animeQuarterDao;
 
     @Override
-    public boolean saveQuarter(AnimeQuarter animeQuarter) {
+    public boolean save(AnimeQuarter animeQuarter) {
         return animeQuarterDao.insert(animeQuarter) > 0;
     }
 

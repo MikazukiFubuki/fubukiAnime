@@ -74,7 +74,7 @@ public class AnimeMain implements Serializable {
      * 动画补完序号
      */
     @TableField("complete_id")
-    private String completeId;
+    private Integer completeId;
 
     /**
      * 动画追番情况
@@ -110,7 +110,7 @@ public class AnimeMain implements Serializable {
      * 动画追番序号
      */
     @TableField("binge_watching_id")
-    private String bingeWatchingId;
+    private Integer bingeWatchingId;
 
     /**
      * 动画创作类型
@@ -158,7 +158,7 @@ public class AnimeMain implements Serializable {
      * 动画重温序号
      */
     @TableField("review_id")
-    private String reviewId;
+    private Integer reviewId;
 
     /**
      * 动画恋爱类型

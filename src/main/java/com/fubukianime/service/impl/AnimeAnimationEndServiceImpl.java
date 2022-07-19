@@ -22,7 +22,7 @@ public class AnimeAnimationEndServiceImpl extends ServiceImpl<AnimeAnimationEndD
     private AnimeAnimationEndDao animeAnimationEndDao;
 
     @Override
-    public boolean saveAnimationEnd(AnimeAnimationEnd animeAnimationEnd) {
+    public boolean save(AnimeAnimationEnd animeAnimationEnd) {
         return animeAnimationEndDao.insert(animeAnimationEnd) > 0;
     }
 

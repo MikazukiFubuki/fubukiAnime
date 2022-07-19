@@ -10,7 +10,7 @@ import com.fubukianime.domain.AnimeLove;
 public interface AnimeLoveService extends IService<AnimeLove> {
 
 
-    boolean saveLove(AnimeLove animeLove);
+    boolean save(AnimeLove animeLove);
 
     boolean modify(AnimeLove animeLove);
 

@@ -9,7 +9,7 @@ import com.fubukianime.domain.AnimeQuarter;
 public interface AnimeQuarterService extends IService<AnimeQuarter> {
 
 
-    boolean saveQuarter(AnimeQuarter animeQuarter);
+    boolean save(AnimeQuarter animeQuarter);
 
     boolean modify(AnimeQuarter animeQuarter);
 

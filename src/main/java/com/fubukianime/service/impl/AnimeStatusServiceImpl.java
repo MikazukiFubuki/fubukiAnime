@@ -19,7 +19,7 @@ public class AnimeStatusServiceImpl extends ServiceImpl<AnimeStatusDao, AnimeSta
     private AnimeStatusDao animeStatusDao;
 
     @Override
-    public boolean saveStatus(AnimeStatus animeStatus) {
+    public boolean save(AnimeStatus animeStatus) {
         return animeStatusDao.insert(animeStatus) > 0;
     }
 

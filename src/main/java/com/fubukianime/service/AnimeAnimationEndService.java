@@ -10,7 +10,7 @@ import com.fubukianime.domain.AnimeSexLimit;
 public interface AnimeAnimationEndService extends IService<AnimeAnimationEnd> {
 
 
-    boolean saveAnimationEnd(AnimeAnimationEnd animeAnimationEnd);
+    boolean save(AnimeAnimationEnd animeAnimationEnd);
 
     boolean modify(AnimeAnimationEnd animeAnimationEnd);
 

@@ -9,7 +9,7 @@ import com.fubukianime.domain.AnimeCreate;
 
 public interface AnimeCreateService extends IService<AnimeCreate> {
 
-    boolean saveCreate(AnimeCreate animeCreate);
+    boolean save(AnimeCreate animeCreate);
 
     boolean modify(AnimeCreate animeCreate);
 

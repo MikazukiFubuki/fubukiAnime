@@ -10,7 +10,7 @@ import com.fubukianime.domain.AnimeOriginalEnd;
 public interface AnimeOriginalEndService extends IService<AnimeOriginalEnd> {
 
 
-    boolean saveOriginalEnd(AnimeOriginalEnd animeOriginalEnd);
+    boolean save(AnimeOriginalEnd animeOriginalEnd);
 
     boolean modify(AnimeOriginalEnd animeOriginalEnd);
 

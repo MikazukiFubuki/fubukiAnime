@@ -19,7 +19,7 @@ public class AnimeCreateServiceImpl extends ServiceImpl<AnimeCreateDao, AnimeCre
     private AnimeCreateDao animeCreateDao;
 
     @Override
-    public boolean saveCreate(AnimeCreate animeCreate) {
+    public boolean save(AnimeCreate animeCreate) {
         return animeCreateDao.insert(animeCreate) > 0;
     }
 

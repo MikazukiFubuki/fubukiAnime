@@ -22,7 +22,7 @@ public class AnimeLeaderGenderServiceImpl extends ServiceImpl<AnimeLeaderGenderD
     private AnimeLeaderGenderDao animeLeaderGenderDao;
 
     @Override
-    public boolean saveLeaderGender(AnimeLeaderGender animeLeaderGender) {
+    public boolean save(AnimeLeaderGender animeLeaderGender) {
         return animeLeaderGenderDao.insert(animeLeaderGender) > 0;
     }
 

@@ -10,7 +10,7 @@ import com.fubukianime.domain.AnimeLeaderGender;
 public interface AnimeLeaderGenderService extends IService<AnimeLeaderGender> {
 
 
-    boolean saveLeaderGender(AnimeLeaderGender animeLeaderGender);
+    boolean save(AnimeLeaderGender animeLeaderGender);
 
     boolean modify(AnimeLeaderGender animeLeaderGender);
 

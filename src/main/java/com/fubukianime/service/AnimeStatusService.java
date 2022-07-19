@@ -9,7 +9,7 @@ import com.fubukianime.domain.AnimeStatus;
 public interface AnimeStatusService extends IService<AnimeStatus> {
 
 
-    boolean saveStatus(AnimeStatus animeStatus);
+    boolean save(AnimeStatus animeStatus);
 
     boolean modify(AnimeStatus animeStatus);
 

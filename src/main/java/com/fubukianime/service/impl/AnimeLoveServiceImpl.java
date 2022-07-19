@@ -22,7 +22,7 @@ public class AnimeLoveServiceImpl extends ServiceImpl<AnimeLoveDao, AnimeLove> i
     private AnimeLoveDao animeLoveDao;
 
     @Override
-    public boolean saveLove(AnimeLove animeLove) {
+    public boolean save(AnimeLove animeLove) {
         return animeLoveDao.insert(animeLove) > 0;
     }
 

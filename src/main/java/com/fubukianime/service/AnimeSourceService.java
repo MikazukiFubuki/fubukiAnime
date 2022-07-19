@@ -10,7 +10,7 @@ import com.fubukianime.domain.AnimeSource;
 public interface AnimeSourceService extends IService<AnimeSource> {
 
 
-    boolean saveSource(AnimeSource animeSource);
+    boolean save(AnimeSource animeSource);
 
     boolean modify(AnimeSource animeSource);
 

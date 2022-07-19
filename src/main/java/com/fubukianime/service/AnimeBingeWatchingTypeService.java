@@ -10,7 +10,7 @@ import com.fubukianime.domain.AnimeLeaderGender;
 public interface AnimeBingeWatchingTypeService extends IService<AnimeBingeWatchingType> {
 
 
-    boolean saveBingeWatchingType(AnimeBingeWatchingType animeBingeWatchingType);
+    boolean save(AnimeBingeWatchingType animeBingeWatchingType);
 
     boolean modify(AnimeBingeWatchingType animeBingeWatchingType);
 

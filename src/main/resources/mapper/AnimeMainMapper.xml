@@ -14,13 +14,13 @@
         <result property="type1" column="type_1" jdbcType="VARCHAR"/>
         <result property="type2" column="type_2" jdbcType="VARCHAR"/>
         <result property="type3" column="type_3" jdbcType="VARCHAR"/>
-        <result property="completeId" column="complete_id" jdbcType="VARCHAR"/>
+        <result property="completeId" column="complete_id" jdbcType="INTEGER"/>
         <result property="bingeWatchingType" column="binge_watching_type" jdbcType="VARCHAR"/>
         <result property="originalEnd" column="original_end" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
         <result property="broadcastEndYear" column="broadcast_end_year" jdbcType="VARCHAR"/>
         <result property="favoriteHeroine" column="favorite_heroine" jdbcType="VARCHAR"/>
-        <result property="bingeWatchingId" column="binge_watching_id" jdbcType="VARCHAR"/>
+        <result property="bingeWatchingId" column="binge_watching_id" jdbcType="INTEGER"/>
         <result property="create" column="create" jdbcType="VARCHAR"/>
         <result property="sexLimit" column="sex_limit" jdbcType="VARCHAR"/>
         <result property="completeQuarter" column="complete_quarter" jdbcType="VARCHAR"/>
@@ -28,7 +28,7 @@
         <result property="broadcastStartYear" column="broadcast_start_year" jdbcType="VARCHAR"/>
         <result property="animationEnd" column="animation_end" jdbcType="VARCHAR"/>
         <result property="leaderGender" column="leader_gender" jdbcType="VARCHAR"/>
-        <result property="reviewId" column="review_id" jdbcType="VARCHAR"/>
+        <result property="reviewId" column="review_id" jdbcType="INTEGER"/>
         <result property="love" column="love" jdbcType="VARCHAR"/>
         <result property="layoutId" column="layout_id" jdbcType="VARCHAR"/>
         <result property="bingeWatchingYear" column="binge_watching_year" jdbcType="VARCHAR"/>

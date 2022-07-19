@@ -22,7 +22,7 @@ public class AnimeSexLimitServiceImpl extends ServiceImpl<AnimeSexLimitDao, Anim
     private AnimeSexLimitDao animeSexLimitDao;
 
     @Override
-    public boolean saveSexLimit(AnimeSexLimit animeSexLimit) {
+    public boolean save(AnimeSexLimit animeSexLimit) {
         return animeSexLimitDao.insert(animeSexLimit) > 0;
     }
 

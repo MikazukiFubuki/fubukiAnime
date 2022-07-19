@@ -10,7 +10,7 @@ import com.fubukianime.domain.AnimeSexLimit;
 public interface AnimeSexLimitService extends IService<AnimeSexLimit> {
 
 
-    boolean saveSexLimit(AnimeSexLimit animeSexLimit);
+    boolean save(AnimeSexLimit animeSexLimit);
 
     boolean modify(AnimeSexLimit animeSexLimit);
 

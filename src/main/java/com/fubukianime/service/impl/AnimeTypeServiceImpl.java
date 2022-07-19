@@ -19,7 +19,7 @@ public class AnimeTypeServiceImpl extends ServiceImpl<AnimeTypeDao, AnimeType> i
     private AnimeTypeDao animeTypeDao;
 
     @Override
-    public boolean saveType(AnimeType animeType) {
+    public boolean save(AnimeType animeType) {
         return animeTypeDao.insert(animeType) > 0;
     }
 
