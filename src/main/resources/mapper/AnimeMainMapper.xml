@@ -50,14 +50,68 @@
                                favorite_heroine, animation_end, original_end, broadcast_start_year, broadcast_end_year,
                                binge_watching_type, binge_watching_year, complete_year, complete_quarter,
                                binge_watching_quarter, status)
-        values (#{name}, null, '26', '26', '26',  (select c.lid from (select max(b.layout_Id) lid from anime_main b) c) + 1, '127', '127', '127', #{create}, null, null, null, '12', '6',
-                '4', '', '5', '8', '102','102', '6', '102','102','13', '13', '1')
+        values (#{name}, null, '26', '26', '26',
+                (select c.lid from (select max(b.layout_Id) lid from anime_main b) c) + 1, '127', '127', '127',
+                #{create}, null, null, null, '12', '6',
+                '4', '', '5', '8', '102', '102', '6', '102', '102', '13', '13', '1')
     </insert>
-    <!--新增动画对应形式-->
+    <!--随新增动画增加其对应形式-->
     <insert id="addAnimeLayout">
         insert into anime_layout(layout_id, layout_type_id, another_name, quarter_num, `episodes`)
         values ((select c.lid from (select max(b.layout_Id) lid from anime_layout b) c) + 1, '16', '', null, null)
     </insert>
+    <!--在已有动画上增加对应形式-->
+    <insert id="addAnimeLayoutById">
+        insert into anime_layout(layout_id, layout_type_id, another_name, quarter_num, `episodes`)
+        values ((select a.layout_Id from anime_main a where a.id = #{id}), '16', '', null, null)
+    </insert>
+
+
+    <!--开始追番，修改动画信息-->
+    <update id="startAnime">
+        update anime_main a
+        <set>
+            <if test="source1 != null and source1 != ''">
+                a.source_1 = #{source1},
+            </if>
+            <if test="bingeWatchingYear != null and bingeWatchingYear != ''">
+                binge_watching_year = (select b.id from anime.anime_year b where #{bingeWatchingYear} = b.year),
+            </if>
+
+            a.binge_watching_id = (select c.bwid from (select max(b.binge_watching_id) bwid from anime_main b) c) + 1,
+
+            <if test="bingeWatchingQuarter != null and bingeWatchingQuarter != ''">
+                a.binge_watching_quarter = (select b.id from anime.quarter b where #{bingeWatchingQuarter} = b.quarter),
+            </if>
+            <if test="bingeWatchingType != null and bingeWatchingType != ''">
+                a.binge_watching_type = #{bingeWatchingType},
+            </if>
+            <if test="broadcastStartYear != null and broadcastStartYear != ''">
+                a.broadcast_start_year = (select b.id from anime.anime_year b where #{broadcastStartYear} = b.year),
+            </if>
+            <if test="broadcastEndYear != null and broadcastEndYear != ''">
+                a.broadcast_end_year = (select b.id from anime.anime_year b where #{broadcastEndYear} = b.year),
+            </if>
+            <if test="status != null and status != ''">
+                a.status = '2'
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+
+    <!--新增动画来源-->
+    <update id="addSource">
+        update anime_main a
+        <set>
+            <if test="source2 != null and source2 != ''">
+                a.source_2 = #{source2},
+            </if>
+            <if test="source3 != null and source3 != ''">
+                a.source_3 = #{source3}
+            </if>
+        </set>
+        where id = #{id};
+    </update>
 
 
     <!--查询全部并分页-->
@@ -167,8 +221,9 @@
              (select layout_id ID4, group_concat(t3.layout separator '、') layout
               from (select t1.id,
                            t1.layout_id,
-                           concat_ws('', t1.another_name, t2.layout_type, if(isnull(t1.quarter_num) = 1,'',concat(t1.quarter_num, '季')),
-                                     if(isnull(t1.episodes) = 1,'',concat(t1.episodes, '集'))) as layout
+                           concat_ws('', t1.another_name, t2.layout_type,
+                                     if(isnull(t1.quarter_num) = 1, '', concat(t1.quarter_num, '季')),
+                                     if(isnull(t1.episodes) = 1, '', concat(t1.episodes, '集'))) as layout
                     from anime_layout t1
                              join anime_layout_type t2
                                   on t1.layout_type_id = t2.id
@@ -352,7 +407,7 @@
         AND T6.ID6 = T0.id
 
         <if test="name != null and name != '' ">
-            and T0.name like "%"#{name}"%"
+            and T0.name like CONCAT('%',#{name},'%')
         </if>
         <if test="score != null and score != '' ">
             and T0.score like CONCAT('%',#{score},'%')
@@ -534,8 +589,9 @@
              (select layout_id ID4, group_concat(t3.layout separator '、') layout
               from (select t1.id,
                            t1.layout_id,
-                           concat_ws('', t1.another_name, t2.layout_type, if(isnull(t1.quarter_num) = 1,'',concat(t1.quarter_num, '季')),
-                                     if(isnull(t1.episodes) = 1,'',concat(t1.episodes, '集'))) as layout
+                           concat_ws('', t1.another_name, t2.layout_type,
+                                     if(isnull(t1.quarter_num) = 1, '', concat(t1.quarter_num, '季')),
+                                     if(isnull(t1.episodes) = 1, '', concat(t1.episodes, '集'))) as layout
                     from anime_layout t1
                              join anime_layout_type t2
                                   on t1.layout_type_id = t2.id

@@ -59,4 +59,23 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
     void addAnimeLayout();
 
 
+    /**
+     * 对已有动画新增形式
+     * @param id
+     */
+    void addAnimeLayoutById(Integer id);
+
+    /**
+     * 开始追番，修改动画信息
+     * @param animeMain
+     */
+    void startAnime(AnimeMain animeMain);
+
+    /**
+     * 开始追番，修改动画信息
+     * @param animeMain
+     */
+    void addSource(AnimeMain animeMain);
+
+
 }

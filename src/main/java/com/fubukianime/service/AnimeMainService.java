@@ -20,7 +20,13 @@ public interface AnimeMainService extends IService<AnimeMain> {
 
     boolean save(AnimeMain animeMain);
 
-    boolean modify(AnimeMain animeMain);
+    boolean saveLayout(Integer id);
+
+    boolean startAnime(AnimeMain animeMain);
+
+    boolean addSource(AnimeMain animeMain);
+
+
 
     boolean delete(Integer id);
 

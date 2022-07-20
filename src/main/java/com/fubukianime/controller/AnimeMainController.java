@@ -42,6 +42,15 @@ public class AnimeMainController {
         return new R(true, animeMainService.list());
     }
 
+    /**
+     * 根据动画id新增形式
+     * @param id
+     * @return
+     */
+    @GetMapping("/saveLayout/{id}")
+    public R saveLayout(@PathVariable Integer id){
+        return new R(true, animeMainService.saveLayout(id));
+    }
 
     /**
      * 根据id查询
@@ -79,6 +88,18 @@ public class AnimeMainController {
     public R selectByCondition(@PathVariable Integer currentPage,@PathVariable Integer pageSize, AnimeMain animeMain){
         PageInfo<AnimeMain> pageInfo = animeMainService.selectByCondition(currentPage, pageSize,animeMain);
         return new R(true, pageInfo);
+    }
+
+    @PutMapping("/startAnime")
+    public R startAnime(@RequestBody AnimeMain animeMain) throws IOException {
+        boolean flag = animeMainService.startAnime(animeMain);
+        return new R(flag, flag ? "修改成功^_^" : "修改失败-_-!");
+    }
+
+    @PutMapping("/addSource")
+    public R addSource(@RequestBody AnimeMain animeMain) throws IOException {
+        boolean flag = animeMainService.addSource(animeMain);
+        return new R(flag, flag ? "修改成功^_^" : "修改失败-_-!");
     }
 
 }

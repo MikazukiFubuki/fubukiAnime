@@ -46,8 +46,21 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
     }
 
     @Override
-    public boolean modify(AnimeMain animeMain) {
-        return animeMainDao.updateById(animeMain) > 0;
+    public boolean saveLayout(Integer id){
+        animeMainDao.addAnimeLayoutById(id);
+        return true;
+    }
+
+    @Override
+    public boolean startAnime(AnimeMain animeMain) {
+        animeMainDao.startAnime(animeMain);
+        return true;
+    }
+
+    @Override
+    public boolean addSource(AnimeMain animeMain) {
+        animeMainDao.addSource(animeMain);
+        return true;
     }
 
     @Override
