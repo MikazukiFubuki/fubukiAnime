@@ -21,6 +21,12 @@ public class AnimeMainController {
     @Autowired
     private AnimeMainService animeMainService;
 
+    /**
+     * 新增动画
+     * @param animeMain
+     * @return
+     * @throws IOException
+     */
     @PostMapping
     public R save(@RequestBody AnimeMain animeMain) throws IOException{
         boolean flag =  animeMainService.save(animeMain);

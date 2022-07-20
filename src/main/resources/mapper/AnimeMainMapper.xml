@@ -34,7 +34,16 @@
         <result property="bingeWatchingQuarter" column="binge_watching_quarter" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
     </resultMap>
+    <resultMap id="LayoutResultMap" type="com.fubukianime.domain.AnimeLayout">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="layoutId" column="layout_id" jdbcType="INTEGER"/>
+        <result property="layoutTypeId" column="layout_type_id" jdbcType="INTEGER"/>
+        <result property="anotherName" column="another_name" jdbcType="VARCHAR"/>
+        <result property="quarterNum" column="quarter_num" jdbcType="INTEGER"/>
+        <result property="episodes" column="episodes" jdbcType="INTEGER"/>
+    </resultMap>
 
+    <!--新增动画-->
     <insert id="addAnime">
         insert into anime_main(name, score, source_1, source_2, source_3, layout_id, type_1, type_2, type_3, `create`,
                                complete_id, binge_watching_id, review_id, love, sex_limit, leader_gender,
@@ -44,6 +53,12 @@
         values (#{name}, null, '26', '26', '26',  (select c.lid from (select max(b.layout_Id) lid from anime_main b) c) + 1, '127', '127', '127', #{create}, null, null, null, '12', '6',
                 '4', '', '5', '8', '102','102', '6', '102','102','13', '13', '1')
     </insert>
+    <!--新增动画对应形式-->
+    <insert id="addAnimeLayout">
+        insert into anime_layout(layout_id, layout_type_id, another_name, quarter_num, `episodes`)
+        values ((select c.lid from (select max(b.layout_Id) lid from anime_layout b) c) + 1, '16', '', null, null)
+    </insert>
+
 
     <!--查询全部并分页-->
     <select id="selectMainAll" resultType="com.fubukianime.domain.AnimeMain">

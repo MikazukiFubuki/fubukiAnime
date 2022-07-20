@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fubukianime.domain.AnimeLayout;
 import com.fubukianime.domain.AnimeMain;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -50,6 +51,12 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
      * @param animeMain
      */
     void addAnime(AnimeMain animeMain);
+
+    /**
+     * 新增动画同时新增形式
+     *
+     */
+    void addAnimeLayout();
 
 
 }

@@ -33,9 +33,15 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
     @Autowired
     private AnimeMainDao animeMainDao;
 
+    /**
+     * 新增动画
+     * @param animeMain
+     * @return
+     */
     @Override
     public boolean save(AnimeMain animeMain) {
         animeMainDao.addAnime(animeMain);
+        animeMainDao.addAnimeLayout();
         return true;
     }
 
