@@ -77,5 +77,32 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
      */
     void addSource(AnimeMain animeMain);
 
+    /**
+     * 番剧补完，修改动画信息
+     * @param animeMain
+     */
+    void endAnime(AnimeMain animeMain);
+
+    /**
+     * 番剧重温
+     * @param id
+     */
+    void reviewAnime(Integer id);
+
+    /**
+     * 对已追动画修改它的形式
+     * @param animeLayout
+     */
+    void saveLayout(AnimeLayout animeLayout);
+
+    /**
+     * 查找要修改动画的全部形式
+     * @param id
+     * @return
+     */
+    List<AnimeLayout> selectAnimeLayoutById(Integer id);
+
+
+
 
 }

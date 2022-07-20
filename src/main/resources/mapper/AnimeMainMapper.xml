@@ -37,7 +37,7 @@
     <resultMap id="LayoutResultMap" type="com.fubukianime.domain.AnimeLayout">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="layoutId" column="layout_id" jdbcType="INTEGER"/>
-        <result property="layoutTypeId" column="layout_type_id" jdbcType="INTEGER"/>
+        <result property="layoutTypeId" column="layout_type_id" jdbcType="VARCHAR"/>
         <result property="anotherName" column="another_name" jdbcType="VARCHAR"/>
         <result property="quarterNum" column="quarter_num" jdbcType="INTEGER"/>
         <result property="episodes" column="episodes" jdbcType="INTEGER"/>
@@ -98,7 +98,6 @@
         </set>
         where id = #{id};
     </update>
-
     <!--新增动画来源-->
     <update id="addSource">
         update anime_main a
@@ -111,6 +110,82 @@
             </if>
         </set>
         where id = #{id};
+    </update>
+    <!--番剧补完，修改动画信息-->
+    <update id="endAnime">
+        update anime_main a
+        <set>
+            <if test="score != null and score != ''">
+                a.score = #{score},
+            </if>
+            <if test="type1 != null and type1 != ''">
+                a.type_1 = #{type1},
+            </if>
+            <if test="type2 != null and type2 != ''">
+                a.type_2 = #{type2},
+            </if>
+            <if test="type3 != null and type3 != ''">
+                a.type_3 = #{type3},
+            </if>
+            <if test="love != null and love != ''">
+                a.love = #{love},
+            </if>
+            <if test="sexLimit != null and sexLimit != ''">
+                a.sex_limit = #{sexLimit},
+            </if>
+
+            a.complete_id = (select c.cid from (select max(b.complete_id) cid from anime_main b) c) + 1,
+
+            <if test="leaderGender != null and leaderGender != ''">
+                a.leader_gender = #{leaderGender},
+            </if>
+            <if test="favoriteHeroine != null and favoriteHeroine != ''">
+                a.favorite_heroine = #{favoriteHeroine},
+            </if>
+            <if test="animationEnd != null and animationEnd != ''">
+                a.animation_end = #{animationEnd},
+            </if>
+            <if test="originalEnd != null and originalEnd != ''">
+                a.original_end = #{originalEnd},
+            </if>
+            <if test="completeYear != null and completeYear != ''">
+                a.complete_year = (select b.id from anime.anime_year b where #{completeYear} = b.year),
+            </if>
+            <if test="completeQuarter != null and completeQuarter != ''">
+                a.complete_quarter = (select b.id from anime.quarter b where #{completeQuarter} = b.quarter),
+            </if>
+            <if test="status != null and status != ''">
+                a.status = '3'
+            </if>
+        </set>
+        where a.id = #{id};
+    </update>
+    <!--番剧重温-->
+    <update id="reviewAnime">
+        update anime_main a
+        <set>
+            a.review_id      = (select c.cid from (select max(b.review_id) cid from anime_main b) c) + 1
+        </set>
+        where id = #{id};
+    </update>
+    <!--对已追动画修改它的形式-->
+    <update id="saveLayout">
+        update anime_layout a
+        <set>
+            <if test="layoutTypeId != null and layoutTypeId != ''">
+                a.layout_type_id = #{layoutTypeId},
+            </if>
+            <if test="anotherName != null and anotherName != ''">
+                a.another_name = #{anotherName},
+            </if>
+            <if test="quarterNum != null and quarterNum != ''">
+                a.quarter_num = #{quarterNum},
+            </if>
+            <if test="episodes != null and episodes != ''">
+                a.episodes = #{episodes},
+            </if>
+        </set>
+        where layout_id = #{layoutId} and id = #{id};
     </update>
 
 
@@ -227,7 +302,7 @@
                     from anime_layout t1
                              join anime_layout_type t2
                                   on t1.layout_type_id = t2.id
-                                      or ifnull(t1.layout_type_id, 16) = t1.id
+                                      or ifnull(t1.layout_type_id, 16) = t2.id
                     order by t1.layout_id) as t3
               group by t3.layout_id) as T4,
 
@@ -371,7 +446,7 @@
         from anime_layout t1
         join anime_layout_type t2
         on t1.layout_type_id = t2.id
-        or ifnull(t1.layout_type_id, 16) = t1.id
+        or ifnull(t1.layout_type_id, 16) = t2.id
         order by t1.layout_id) as t3
         group by t3.layout_id) as T4,
 
@@ -595,7 +670,7 @@
                     from anime_layout t1
                              join anime_layout_type t2
                                   on t1.layout_type_id = t2.id
-                                      or ifnull(t1.layout_type_id, 16) = t1.id
+                                      or ifnull(t1.layout_type_id, 16) = t2.id
                     order by t1.layout_id) as t3
               group by t3.layout_id) as T4,
 
@@ -630,6 +705,31 @@
           AND T6.ID6 = T0.id
           AND T0.id = #{id}
         ORDER BY T0.status, T0.id ASC
+    </select>
+
+    <!--查找要修改动画的全部形式-->
+    <select id="selectAnimeLayoutById" resultType="com.fubukianime.domain.AnimeLayout">
+        select T0.id,
+               T0.layout_id,
+               T2.name,
+               T1.layoutTypeId,
+               T0.another_name,
+               T0.quarter_num,
+               T0.episodes
+        from anime_layout T0,anime_main T2,
+            (select a.id                ID2,
+             b.layout_type       layoutTypeId
+      from (anime.anime_layout a
+               join anime.anime_layout_type b
+                    on a.layout_type_id = b.id
+                        or ifnull(a.layout_type_id, 16) = b.id)
+      group by a.id
+     ) as T1
+
+        WHERE T1.ID2 = T0.id
+          AND T0.layout_id = #{layoutId}
+          AND T2.layout_id = #{layoutId}
+        ORDER BY T0.id asc
     </select>
 
     <!--固定几个需要查询的字段-->

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fubukianime.dao.AnimeMainDao;
 import com.fubukianime.dao.AnimeMainDao;
+import com.fubukianime.domain.AnimeLayout;
 import com.fubukianime.domain.AnimeLove;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.domain.AnimeMain;
@@ -46,7 +47,7 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
     }
 
     @Override
-    public boolean saveLayout(Integer id){
+    public boolean addAnimeLayoutById(Integer id){
         animeMainDao.addAnimeLayoutById(id);
         return true;
     }
@@ -60,6 +61,24 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
     @Override
     public boolean addSource(AnimeMain animeMain) {
         animeMainDao.addSource(animeMain);
+        return true;
+    }
+
+    @Override
+    public boolean endAnime(AnimeMain animeMain) {
+        animeMainDao.endAnime(animeMain);
+        return true;
+    }
+
+    @Override
+    public boolean saveLayout(AnimeLayout animeLayout) {
+        animeMainDao.saveLayout(animeLayout);
+        return true;
+    }
+
+    @Override
+    public boolean reviewAnime(Integer id) {
+        animeMainDao.reviewAnime(id);
         return true;
     }
 
@@ -106,5 +125,11 @@ public class AnimeMainServiceImpl extends ServiceImpl<AnimeMainDao, AnimeMain> i
         List<AnimeMain> animeMainList = animeMainDao.selectMainByCondition(animeMain);
         PageInfo<AnimeMain> animeMainPageInfo = new PageInfo<>(animeMainList, pageSize);
         return animeMainPageInfo;
+    }
+
+    @Override
+    public List<AnimeLayout> selectAnimeLayoutById(Integer id) {
+        List<AnimeLayout> animeLayoutList = animeMainDao.selectAnimeLayoutById(id);
+        return animeLayoutList;
     }
 }

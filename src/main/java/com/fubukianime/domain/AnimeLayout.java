@@ -14,11 +14,13 @@ public class AnimeLayout {
     @TableField("`layout_id`")
     private Integer layoutId;
     @TableField("layout_type_id")
-    private Integer layoutTypeId;
+    private String layoutTypeId;
     @TableField("another_name")
     private String anotherName;
     @TableField("quarter_num")
     private Integer quarterNum;
     @TableField("episodes")
     private Integer episodes;
+    @TableField(exist = false)
+    private String name;
 }

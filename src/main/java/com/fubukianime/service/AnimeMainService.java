@@ -2,6 +2,7 @@ package com.fubukianime.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.fubukianime.domain.AnimeLayout;
 import com.fubukianime.domain.AnimeLove;
 import com.fubukianime.domain.AnimeMain;
 import com.fubukianime.domain.AnimeMain;
@@ -20,13 +21,17 @@ public interface AnimeMainService extends IService<AnimeMain> {
 
     boolean save(AnimeMain animeMain);
 
-    boolean saveLayout(Integer id);
+    boolean addAnimeLayoutById(Integer id);
 
     boolean startAnime(AnimeMain animeMain);
 
     boolean addSource(AnimeMain animeMain);
 
+    boolean endAnime(AnimeMain animeMain);
 
+    boolean saveLayout(AnimeLayout animeLayout);
+
+    boolean reviewAnime(Integer id);
 
     boolean delete(Integer id);
 
@@ -50,6 +55,8 @@ public interface AnimeMainService extends IService<AnimeMain> {
     IPage<AnimeMain> getPage(int currentPage, int pageSize, AnimeMain animeMain);
 
     PageInfo<AnimeMain> selectByCondition(Integer pageNum, Integer pageSize, AnimeMain animeMain);
+
+    List<AnimeLayout> selectAnimeLayoutById(Integer id);
 
 
 
