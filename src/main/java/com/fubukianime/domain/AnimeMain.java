@@ -207,4 +207,10 @@ public class AnimeMain implements Serializable {
     @TableField(exist = false)
     private String type;
 
+    /**
+     * 要修改后的追补重番id
+     */
+    @TableField(exist = false)
+    private Integer modifyId;
+
 }

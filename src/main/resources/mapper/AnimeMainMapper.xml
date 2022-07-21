@@ -187,6 +187,16 @@
         </set>
         where layout_id = #{layoutId} and id = #{id};
     </update>
+    <!--根据id修改追番、补番、重温序号-->
+    <update id="updateCompleteId">
+        update anime_main a
+        <set>
+            <if test="completeId != null and completeId != ''">
+                a.complete_id = #{completeId},
+            </if>
+        </set>
+        where id = #{id};
+    </update>
 
 
     <!--查询全部并分页-->
@@ -708,7 +718,7 @@
     </select>
 
     <!--查找要修改动画的全部形式-->
-    <select id="selectAnimeLayoutById" resultType="com.fubukianime.domain.AnimeLayout">
+    <select id="selectAnimeLayoutByAnimeId" resultType="com.fubukianime.domain.AnimeLayout">
         select T0.id,
                T0.layout_id,
                T2.name,
@@ -730,6 +740,43 @@
           AND T0.layout_id = #{layoutId}
           AND T2.layout_id = #{layoutId}
         ORDER BY T0.id asc
+    </select>
+
+    <!--根据要修改动画的形式id查询-->
+    <select id="selectLayoutById" resultType="com.fubukianime.domain.AnimeLayout">
+        select T0.id,
+               T0.layout_id,
+               T2.name,
+               T1.layoutTypeId,
+               T0.another_name,
+               T0.quarter_num,
+               T0.episodes
+        from anime_layout T0,anime_main T2,
+             (select a.id                ID2,
+                     b.layout_type       layoutTypeId,
+                     a.layout_id
+              from (anime.anime_layout a
+                       join anime.anime_layout_type b
+                            on a.layout_type_id = b.id
+                                or ifnull(a.layout_type_id, 16) = b.id)
+              group by a.id
+             ) as T1
+
+        WHERE T1.ID2 = T0.id
+          AND T2.layout_id = T1.layout_id
+          AND T0.id = #{id}
+        ORDER BY T0.id asc
+    </select>
+
+    <!--根据追番、补番、重温序号查找id-->
+    <select id="selectIdByBCRId" resultType="java.lang.Integer">
+        select a.id
+        from anime_main a
+        <where>
+            <if test="completeId != null and completeId != '' ">
+                and a.complete_id = #{completeId}
+            </if>
+        </where>
     </select>
 
     <!--固定几个需要查询的字段-->

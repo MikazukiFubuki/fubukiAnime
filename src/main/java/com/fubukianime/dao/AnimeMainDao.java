@@ -30,7 +30,7 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
      * @param id
      * @return
      */
-    public AnimeMain selectMainById(Integer id);
+    AnimeMain selectMainById(Integer id);
 
     /**
      * 查询全部并分页
@@ -53,7 +53,7 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
     void addAnime(AnimeMain animeMain);
 
     /**
-     * 新增动画同时新增形式
+     * 新增动画同时新增对应id形式
      *
      */
     void addAnimeLayout();
@@ -72,7 +72,7 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
     void startAnime(AnimeMain animeMain);
 
     /**
-     * 开始追番，修改动画信息
+     * 增加动画来源
      * @param animeMain
      */
     void addSource(AnimeMain animeMain);
@@ -100,7 +100,27 @@ public interface AnimeMainDao extends BaseMapper<AnimeMain> {
      * @param id
      * @return
      */
-    List<AnimeLayout> selectAnimeLayoutById(Integer id);
+    List<AnimeLayout> selectAnimeLayoutByAnimeId(Integer id);
+
+    /**
+     * 根据要修改动画的形式id查询
+     * @param id
+     * @return
+     */
+    AnimeLayout selectLayoutById(Integer id);
+
+    /**
+     * 根据id修改补番序号
+     * @param animeMain
+     */
+    void updateCompleteId(AnimeMain animeMain);
+
+    /**
+     * 根据追番、补番、重温序号查找id
+     * @param
+     * @return
+     */
+    Integer selectIdByBCRId(AnimeMain animeMain);
 
 
 

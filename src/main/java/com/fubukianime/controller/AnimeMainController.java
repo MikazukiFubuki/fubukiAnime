@@ -30,8 +30,8 @@ public class AnimeMainController {
      * @throws IOException
      */
     @PostMapping
-    public R save(@RequestBody AnimeMain animeMain) throws IOException{
-        boolean flag =  animeMainService.save(animeMain);
+    public R addAnime(@RequestBody AnimeMain animeMain) throws IOException{
+        boolean flag =  animeMainService.addAnime(animeMain);
         return new R(flag, flag ? "添加成功^_^" : "添加失败-_-!");
     }
 
@@ -45,19 +45,17 @@ public class AnimeMainController {
     }
 
     /**
-     * 根据动画id新增形式
+     * 对已有动画新增形式
      * @param id
-     * @return
      */
     @GetMapping("/addAnimeLayoutById/{id}")
-    public R saveLayout(@PathVariable Integer id){
+    public R addAnimeLayoutById(@PathVariable Integer id){
         return new R(true, animeMainService.addAnimeLayoutById(id));
     }
 
     /**
-     * 根据动画id新增形式
+     * 番剧重温
      * @param id
-     * @return
      */
     @GetMapping("/reviewAnime/{id}")
     public R reviewAnime(@PathVariable Integer id){
@@ -65,13 +63,13 @@ public class AnimeMainController {
     }
 
     /**
-     * 根据动画id新增形式
+     * 查找要修改动画的全部形式
      * @param id
      * @return
      */
-    @GetMapping("/selectAnimeLayoutById/{id}")
-    public R selectAnimeLayoutById(@PathVariable Integer id){
-        List<AnimeLayout> list = animeMainService.selectAnimeLayoutById(id);
+    @GetMapping("/selectAnimeLayoutByAnimeId/{id}")
+    public R selectAnimeLayoutByAnimeId(@PathVariable Integer id){
+        List<AnimeLayout> list = animeMainService.selectAnimeLayoutByAnimeId(id);
         return new R(true, list);
     }
 
@@ -81,7 +79,7 @@ public class AnimeMainController {
      * @return
      */
     @GetMapping("/{id}")
-    public R getById(@PathVariable Integer id){
+    public R selectMainById(@PathVariable Integer id){
         return new R(true, animeMainService.selectMainById(id));
     }
 
@@ -113,28 +111,68 @@ public class AnimeMainController {
         return new R(true, pageInfo);
     }
 
+    /**
+     * 开始追番，修改动画信息
+     * @param animeMain
+     */
     @PutMapping("/startAnime")
     public R startAnime(@RequestBody AnimeMain animeMain) throws IOException {
         boolean flag = animeMainService.startAnime(animeMain);
         return new R(flag, flag ? "修改成功^_^" : "修改失败-_-!");
     }
 
+    /**
+     * 增加动画来源
+     * @param animeMain
+     */
     @PutMapping("/addSource")
     public R addSource(@RequestBody AnimeMain animeMain) throws IOException {
         boolean flag = animeMainService.addSource(animeMain);
         return new R(flag, flag ? "修改成功^_^" : "修改失败-_-!");
     }
 
+    /**
+     * 番剧补完，修改动画信息
+     * @param animeMain
+     */
     @PutMapping("/endAnime")
     public R endAnime(@RequestBody AnimeMain animeMain) throws IOException {
         boolean flag = animeMainService.endAnime(animeMain);
         return new R(flag, flag ? "修改成功^_^" : "修改失败-_-!");
     }
 
+
+    /**
+     * 对已追动画修改它的形式
+     * @param animeLayout
+     */
     @PutMapping("/saveLayout")
     public R saveLayout(@RequestBody AnimeLayout animeLayout) throws IOException {
         boolean flag = animeMainService.saveLayout(animeLayout);
         return new R(flag, flag ? "修改成功^_^" : "修改失败-_-!");
     }
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    @GetMapping("/selectLayoutById/{id}")
+    public R selectLayoutById(@PathVariable Integer id){
+
+        return new R(true, animeMainService.selectLayoutById(id));
+    }
+
+    /**
+     * 修改追番、补番、重温序号
+     * @param
+     * @return
+     */
+    @PutMapping("/updateCompleteId")
+    public R updateCompleteId(@RequestBody AnimeMain animeMain) throws IOException{
+
+        return new R(true, animeMainService.updateCompleteId(animeMain));
+    }
+
 
 }
